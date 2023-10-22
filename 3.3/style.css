@@ -1,0 +1,19 @@
+@font-face {
+    font-family: Angeme;
+    src: url("Angeme.ttf");
+}
+
+h1 {
+    font-family: Angeme;
+}
+
+.thumb img {
+    padding: 15px;
+    margin-left: 150px;
+    margin-right: 100px;
+    margin-bottom: 10px;
+}
+
+.column {
+    column-count: 2;
+}
