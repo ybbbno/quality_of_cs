@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <title>Введите день недели!</title>
+</head>
+<body>
+    <script>
+        let days = [
+            {day:"понедельник", breakfast:"Яблоко", place:"Колледж"},
+            {day:"вторник", breakfast:"Куриное филе", place:"Колледж"},
+            {day:"среда", breakfast:"Макароны", place:"Колледж"},
+            {day:"четверг", breakfast:"Огурец", place:"Колледж"},
+            {day:"пятница", breakfast:"Гречка", place:"Колледж"},
+            {day:"суббота", breakfast:"Тунец", place:"Театр"},
+            {day:"воскресенье", breakfast:"Банан", place:"Кино"}
+        ];
+        
+        let k = prompt("Введите какой сегодня день", "");
+        let k_i = 0;
+        for(let i = 0; i < days.length; i++){
+            if(days[i].day === k.toLowerCase()){
+                k_i = i;
+                break;
+            }
+        }
+        console.log(k_i);
+        alert("Вы будете есть на завтрак - "+days[k_i].breakfast);
+        alert("Вы сегодня пойдёте в "+days[k_i].place);
+        if(days[k_i].place === "Колледж") window.location.href = "https://ci.nsu.ru/";
+        else if(days[k_i].place === "Театр") window.location.href = "https://novdt.ru/";
+        else window.location.href = "https://kinomax.ru/";
+    </script>
+</body>
+</html>

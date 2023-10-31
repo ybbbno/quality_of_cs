@@ -1,0 +1,8 @@
+@font-face {
+    font-family: Angeme;
+    src: url("Angeme.ttf");
+}
+
+h1 {
+    font-family: Angeme;
+}

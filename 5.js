@@ -87,5 +87,10 @@ for(let i = 0; i < dict.length; i++){
         console.log(dict[i][1])
         break;
     }
+    if(dict[i][1] === str.toLowerCase()){
+        a = false;
+        console.log(dict[i][0]);
+        break;
+    }
 }
 if (a) console.log('?');

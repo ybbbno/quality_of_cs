@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+    <title>Напиши своё имя!</title>
+</head>
+<body>
+    <script>
+        let CAT = [
+            "луна",
+            "оливер",
+            "белла",
+            "чарли",
+            "китти",
+            "макс",
+            "грейси",
+            "рыжий"
+        ]
+
+        let DOG = [
+            "бэйли",
+            "арни",
+            "лука",
+            "джек",
+            "молли",
+            "арон",
+            "гай",
+            "герри"
+        ]
+
+        let name = prompt("Введите своё имя", "");
+        let k = true;
+        alert("Привет, " + name + "!");
+        for(let i = 0; i < CAT.length; i++){
+            if(CAT[i] === name.toLowerCase()) {
+                k = false;
+                alert("Похоже, вы - кошка (или собака)");
+                window.location.href = "https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D1%88%D0%BA%D0%B0";
+                break;
+            }
+        }
+        
+        for(let i = 0; i < DOG.length; i++){
+            if(DOG[i] === name.toLowerCase()){
+                k = false;
+                alert("Похоже, вы - кошка (или собака)");
+                window.location.href = "https://ru.wikipedia.org/wiki/%D0%A1%D0%BE%D0%B1%D0%B0%D0%BA%D0%B0";
+                break;
+            }
+        }
+
+        if(k){
+            alert("Похоже, вы - человек");
+            window.location.href = "https://ru.wikipedia.org/wiki/%D0%A7%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA";
+        }
+    </script>
+</body>
+</html>
