@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    <title>Лабораторная 9</title>
+</head>
+<body>
+    <script>
+        var game = function(){
+            var random_num = Math.floor(0 + Math.random() * (100 + 1 - 0));
+            console.log(random_num);
+            alert("Компьютер загадал число!");
+            var score = 0;
+            var start = Date.now();
+            while(parseInt(prompt("Попробуй его отгадать!")) !== random_num) score++;
+            var end = Date.now();
+            alert("Вы смогли отгадать за "+score+" попыток и "+(end-start)+" миллисекунд");
+        }
+        game();
+        while(confirm("Попробуем ещё раз?")) game();
+    </script>
+</body>
+</html>

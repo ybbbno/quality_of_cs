@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+    <title>Лабораторная 8</title>
+</head>
+<body>
+    <script>
+        var name = prompt("Как вас зовут?");
+        alert("Привет, "+name);
+        document.write("Привет, "+name+" <br \/>");
+
+        var CAT = [
+            {name:"Луна", price:150, food:"Whiskas"},
+            {name:"Оливер", price:200, food:"Kitekat"},
+            {name:"Белла", price:175, food:"Мясо"},
+            {name:"Чарли", price:125, food:"Морковь"}
+        ]
+
+        var DOG = [
+            {name:"Бэйли", price:150, food:"Chappi"},
+            {name:"Арни", price:200, food:"Pedigree"},
+            {name:"Лука", price:175, food:"Sirus"},
+            {name:"Джек", price:125, food:"Мираторг"}
+        ]
+        
+        var likesCats = confirm("Тебе нравятся кошки?");
+        if(likesCats) {
+            document.write(" Купи кошку! <br \/>");
+            var str = "Выберите номер кошки:"
+            for(let i = 0; i < CAT.length; i++) str += "\n"+(i+1)+". "+CAT[i].name;
+            var num = parseInt(prompt(str));
+            document.write(" "+CAT[num].name+" стоит "+CAT[num].price+" и любимая еда "+CAT[num].food+" <br \/>");
+            var num_food = parseInt(prompt("Сколько корма нужно купить животному"));
+            document.write(" Общая стоимость покупки "+(CAT[num].price * num_food))
+        } else {
+            document.write(" Тогда купи собаку! <br \/>");
+            var str = "Выберите номер собаки:"
+            for(let i = 0; i < DOG.length; i++) str += "\n"+(i+1)+". "+DOG[i].name;
+            var num = parseInt(prompt(str));
+            document.write(" "+DOG[num].name+" стоит "+DOG[num].price+" и любимая еда "+DOG[num].food+" <br \/>");
+            var num_food = parseInt(prompt("Сколько корма нужно купить животному"));
+            document.write(" Общая стоимость покупки "+(DOG[num].price * num_food))
+        }
+    </script>
+</body>
+</html>
