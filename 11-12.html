@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <title>Виселица</title>
+</head>
+<body>
+    <script>
+        function validate_letter(letter){
+            if(letter.toLowerCase() === "exit") return true;
+            else if(letter.length !== 1) return false
+            else if (!/^[а-яА-Я]+$/.test(letter)) return false;
+            else return letter;
+        }
+
+        function start(){
+            let words = ["программа", "кошка", "бегемот", "студент"];
+            let letters_exposed = [];
+            let word = Math.floor(Math.random() * words.length);
+            let word_massiv = [];
+            let attempts = 0;
+            for(let i = 0; i < words[word].length; i++) word_massiv.push('_');
+
+            while(words[word] != word_massiv.join('')){
+                if(attempts === 10) return attempts;
+                alert("Слово: "+word_massiv.join(' ').toUpperCase()+"\nИспользованные буквы: "+letters_exposed.join(", ").toUpperCase());
+                let letter = validate_letter(prompt("Введите букву\nЧтобы выйти из игры напишите exit"));
+                if(letter === true) {
+                    alert("Игра окончена");
+                    break;
+                } else if(letter === false) alert("Это не буква");
+                else {
+                    if(letters_exposed.indexOf(letter) !== undefined && letters_exposed.indexOf(letter) !== -1) alert("Вы уже использовали эту букву");
+                    else{
+                        letters_exposed.push(letter);
+                        let check = words[word].indexOf(letter);
+                        if(check !== undefined && check !== -1){
+                            alert(letter.toUpperCase()+" найдена в слове");
+                            for(let i = 0; i < words[word].length; i++){
+                                if(words[word][i] === letter) word_massiv[i] = letter;
+                            }
+                        } else alert(letter.toUpperCase()+" не найдена в слове");
+                    }
+                    
+                }
+                attempts++;
+            }
+            alert("Вы отгадали слово "+word_massiv.join('').toUpperCase()+" за "+attempts+" попыток");
+        }
+
+        while(confirm("Сыграем в Висельницу?")){
+            if (start() === 10) alert("Игра окончена, вы не смогли отгадать слово за 10 попыток");
+        }
+        alert("Игра окончена");
+    </script>
+</body>
+</html>
+
+

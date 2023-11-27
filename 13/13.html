@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<head>
+    <title>Крестики-Нолики</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body align="center" bgcolor="#000">
+    <div id="popup" class="popup">
+        <h2>Кем вы бы хотели играть?</h2>
+        <button onclick="selectOption(0)" class="button_choice">X</button>
+        <button onclick="selectOption(1)" class="button_choice">O</button>
+    </div>
+    <script>
+
+        function change_turn(_turn) { return (_turn + 1) % 2; }
+
+        function get_symbol_by_turn(_turn){
+            switch(_turn){
+                case 0: return "X";
+                case 1: return "O";
+            }
+        }
+
+        function button_checker(_button, _turn){
+            switch(_button.innerText){
+                case "-":
+                    _button.innerText = get_symbol_by_turn(_turn);
+                    return;
+                default: return;
+            }
+        }
+
+        function check_amount(_amount, _button, _turn){
+            switch(_button.innerText){
+                case "-": return 0;
+                case get_symbol_by_turn(_turn): return _amount + 1;
+            }
+        }
+
+        function draw_checker(_x, _y){
+            for(let i = 0; i < _x; i++){
+                for(let j = 0; j < _y; j++){
+                    if(document.getElementById("b"+i+j).innerText === "-") return false;
+                }
+            }
+            return true;
+        }
+
+        function is_end(x, y, i, j){
+            if(win_checker(x, y, i, j)) return "player";
+            if(draw_checker(x, y)) return "draw";
+            return false;
+        }
+
+        function win_checker(_x, _y, _i, _j){
+            let _x_min = _i-3 < 0 ? 0 : _i-3;
+            let _y_min = _j-3 < 0 ? 0 : _j-3;
+            let _x_max = _i+3 > _x ? _x : _i+3;
+            let _y_max = _j+3 > _y ? _y : _j+3;
+
+            let _y_check = 0;
+            let _x_check = 0;
+            let _main_diag = 0;
+            let _side_diag = 0;
+
+            for(let turn = 0; turn < 2; turn++){
+                for(let i = _x_min; i < _x_max; i++){
+                    for(let j = _y_min; j < _y_max; j++){
+                        let _button = document.getElementById("b"+i+j);
+                        if(j === _j) _y_check = check_amount(_y_check, _button, turn);
+                        if(i === _i) _x_check = check_amount(_x_check, _button, turn);
+                        if(i - j === _i - _j) _main_diag = check_amount(_main_diag, _button, turn);
+                        if(i + j + 1 === _i + _j + 1) _side_diag = check_amount(_side_diag, _button, turn);
+                        if(_y_check === 3 || _x_check === 3 || _main_diag === 3 || _side_diag === 3) return true;
+                    }
+                }
+                _y_check = 0;
+                _x_check = 0;
+                _main_diag = 0;
+                _side_diag = 0;
+            }
+            
+            return false;
+        }
+
+        function create_field(_x, _y){
+            for(let i = 0; i < _x; i++){
+                for(let j = 0; j < _y; j++) {
+                    _button = document.createElement("button");
+                    _button.innerText = "-";
+                    _button.id = "b"+i+j;
+                    _button.className = "field_style";
+
+                    document.body.appendChild(_button);
+                }
+                document.body.innerHTML += "<br>";
+            }
+        }
+
+        function computer_turn(_x, _y, _turn){
+            let x = Math.floor(Math.random() * _x);
+            let y = Math.floor(Math.random() * _y);
+            let _button = document.getElementById("b"+x+y);
+            while(_button.innerText !== "-") {
+                x = Math.floor(Math.random() * _x);
+                y = Math.floor(Math.random() * _y)
+                _button = document.getElementById("b"+x+y);
+            }
+            button_checker(_button, _turn);
+            return is_end(_x, _y, x, y);
+        }
+
+        function openPopup() {
+            document.getElementById('popup').style.display = "block";
+        }
+
+        function selectOption(player_turn) {
+            let turn = 0;
+            let x = parseInt(prompt("Введите ширину поля"));
+            let y = parseInt(prompt("Введите высоту поля"));
+            let end = false;
+        
+            create_field(x, y, turn);
+
+            document.getElementById('popup').style.display = 'none';
+            
+            if(player_turn == 1) {
+                end = computer_turn(x, y, turn);
+                turn = change_turn(turn);
+            }
+
+            for(let i = 0; i < x; i++){
+                for(let j = 0; j < y; j++){
+                    let _button = document.getElementById("b"+i+j);
+                    _button.addEventListener("click", function() {
+                        if(_button.innerText === "-" && end === false){
+                            button_checker(_button, turn);
+                            end = is_end(x, y, i, j);
+                            turn = change_turn(turn);
+                            
+                            if(end === false){
+                                end = computer_turn(x, y, turn);
+                                turn = change_turn(turn);
+                            }
+                            if(end !== false){
+                                let text = document.createElement("h1");
+                                text.id = "text";
+                                document.body.appendChild(text);
+
+                                let button = document.createElement("button");
+                                button.id = "bagain"
+                                button.innerText = "Начать заново";
+                                button.addEventListener("click", function() {
+                                    location.reload();
+                                });
+                                button.className = "button_text";
+                                document.body.appendChild(button);
+                            }
+                        }
+                        if(end !== false){
+                            let str;
+                            if(end === "draw") str = "Ничья!";
+                            else str = "Выиграл игрок "+get_symbol_by_turn(change_turn(turn));
+                            str += "\nХотите сыграть ещё раз?";
+                            document.getElementById("text").innerText = str;
+                        }
+                    });
+                }
+            }
+        }
+
+        openPopup();
+    </script>
+</body>
+</html>

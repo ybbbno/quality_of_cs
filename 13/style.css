@@ -1,0 +1,56 @@
+@font-face {
+    font-family: utromprescachat;
+    src: url(UtromPressKachat.ttf);
+}
+
+.field_style {
+    width: 150px;
+    height: 150px;
+    border: 0.5px solid #fff;
+    color: #fff;
+    background-color: #ffffff00;
+    font-size: 30px;
+    font-family: utromprescachat;
+}
+
+h1 {
+    color: #fff;
+    font-family: utromprescachat;
+}
+
+h2 {
+    color: #fff;
+    font-family: utromprescachat;
+}
+
+.button_choice{
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    border: 0.5px solid #fff;
+    color: #fff;
+    background-color: #ffffff00;
+    font-family: utromprescachat;
+}
+
+.button_text {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    border: 0.5px solid #fff;
+    color: #fff;
+    background-color: #ffffff00;
+    font-family: utromprescachat;
+}
+
+.popup {
+    display: none; /* По умолчанию окно скрыто */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #fff;
+    background-color: #ffffff00;
+    padding: 20px;
+    z-index: 1000;
+}
